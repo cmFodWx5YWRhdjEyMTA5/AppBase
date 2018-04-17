@@ -30,4 +30,8 @@ public class UserUtil {
         String userString = gson.toJson(user);
         SPUtil.putStringValueToSP("user",userString);
     }
+
+    public static boolean isLoginEd(){
+        return getUserInfo() != null;
+    }
 }

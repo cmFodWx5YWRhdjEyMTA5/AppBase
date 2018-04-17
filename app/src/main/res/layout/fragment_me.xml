@@ -1,13 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.haijun.shop.fragment.MeFragment">
+    tools:context="com.haijun.shop.fragment.MeFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_me_persiondata"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="me" />
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="地址、区域等选择"
+        android:padding="5dp"
+        android:background="#666999"/>
 
-</FrameLayout>
+
+</LinearLayout>

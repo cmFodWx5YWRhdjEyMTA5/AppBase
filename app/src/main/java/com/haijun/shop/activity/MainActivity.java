@@ -16,6 +16,10 @@ import com.haijun.shop.fragment.HomeFragment;
 import com.haijun.shop.fragment.MeFragment;
 import com.haijun.shop.fragment.MessageFragment;
 import com.haijun.shop.fragment.OrderFragment;
+import com.haijun.shop.util.LogUtil;
+import com.haijun.shop.util.database.BulkDatabase;
+import com.haijun.shop.util.database.FileInfo;
+import com.haijun.shop.util.database.MyInsertBulkDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +42,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //初始化页面
-        initView();
     }
 
     //初始化页面
@@ -84,10 +85,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         addFragment(homeFragment);
 
 
+
+
+
     }
 
     @Override
     protected void initData() {
+        LogUtil.i("BulkDatabase","initData");
+
+        ArrayList<FileInfo> list=new ArrayList<>();//这里的FileInfo是需要你修改成你需要插入的数据信息集合
+        for (int i=0;i<10000;i++){
+            list.add(new FileInfo("test"));
+        }
+
+        String sql = "insert into data(fileName) values (?)";
+        /*String insertSQL = "insert into " + SQLHelp.GROUP_MEMBER_TABLENAME + "(" + SQLHelp.GROUP_ID
+                + "," + SQLHelp.MEMBERS_SUBS_ID + "," + SQLHelp.MEMBER_NICK_NAME + ","
+                + SQLHelp.MEMBER_ROLE + "," + SQLHelp.MEMBER_JID + "," + SQLHelp.MEM_UNION_KEY
+                + "," + SQLHelp.CREAT_TIME + ", " + SQLHelp.UPDATE_TIME + "," + SQLHelp.ORDER_ID
+                + "," + SQLHelp.EXT + ") values " + "(?,?,?,?,?,?,?,?,?,?)";*/
+        BulkDatabase mInsertBulkDatabase=new MyInsertBulkDatabase(sql,list,getApplicationContext());//这里建议放入后台线程运行。
+        mInsertBulkDatabase.doBulk();
+
 
     }
 
